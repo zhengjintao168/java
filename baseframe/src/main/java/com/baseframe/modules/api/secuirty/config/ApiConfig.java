@@ -1,4 +1,4 @@
-package com.baseframe.modules.api.app.secuirty.config;
+package com.baseframe.modules.api.secuirty.config;
 
 /**
  * User: zjt

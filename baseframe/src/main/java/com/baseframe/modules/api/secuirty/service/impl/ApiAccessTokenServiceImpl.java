@@ -1,8 +1,8 @@
-package com.baseframe.modules.api.app.secuirty.service.impl;
+package com.baseframe.modules.api.secuirty.service.impl;
 
-import com.baseframe.modules.api.app.secuirty.dao.ApiAccessTokenDao;
-import com.baseframe.modules.api.app.secuirty.model.ApiAccessTokenModel;
-import com.baseframe.modules.api.app.secuirty.service.ApiAccessTokenService;
+import com.baseframe.modules.api.secuirty.dao.ApiAccessTokenDao;
+import com.baseframe.modules.api.secuirty.model.ApiAccessTokenModel;
+import com.baseframe.modules.api.secuirty.service.ApiAccessTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

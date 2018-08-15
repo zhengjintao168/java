@@ -32,7 +32,9 @@
     <mvc:default-servlet-handler />
 
     <!-- 实现静态资源访问, 避免被spring mvc直接/, 过滤-->
-    <mvc:resources mapping="/**" location="/resources" />
+    <mvc:resources location="/resources/" mapping="/resources/**" />
+    <mvc:resources location="/view/" mapping="/view/**" />
+    <mvc:resources location="/static/" mapping="/static/**" />
 
     <!-- 默认访问登录页-->
     <mvc:view-controller path="/" view-name="redirect:/console/login"/>

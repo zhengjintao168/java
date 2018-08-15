@@ -1,4 +1,4 @@
-package com.baseframe.modules.api.app.secuirty.model;
+package com.baseframe.modules.api.secuirty.model;
 
 import java.util.Date;
 

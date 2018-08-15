@@ -9,6 +9,7 @@
 
     <!-- 实现静态资源访问, 避免被spring secuirty所过滤 -->
     <secuirty:http pattern="/resources/**" security="none" create-session="never"/>
+    <secuirty:http pattern="/static/**" security="none" create-session="never"/>
 
     <!-- 过滤器配置,spring编码过滤器 -->
     <bean id="springUtf8Encoding" class="org.springframework.web.filter.CharacterEncodingFilter">
@@ -17,8 +18,8 @@
     </bean>
 
     <!-- 外部接口的安全性控制 -->
-    <bean id="apiSecuirtyFilter" class="com.baseframe.modules.api.app.secuirty.filter.ApiSecuirtyFilter"/>
     <!-- 拦截外部接口的请求,进行utf-8编码过滤,安全性过滤(无需创建session,并禁用csrf跨站点请求伪造的过滤  -->
+    <bean id="apiSecuirtyFilter" class="com.baseframe.modules.api.secuirty.filter.ApiSecuirtyFilter"/>
     <secuirty:http pattern="/api/**" once-per-request="true" create-session="never" auto-config="true">
         <secuirty:csrf disabled="true"/>
         <secuirty:custom-filter ref="springUtf8Encoding" position="FIRST"/>
@@ -51,7 +52,7 @@
 
         <!-- 允许非匿名用户访问(必须先登录) -->
         <secuirty:intercept-url pattern="/console/**" access="isAuthenticated()" />
-        <secuirty:intercept-url pattern="/**/*.jsp" access="isAuthenticated()" />
+        <secuirty:intercept-url pattern="/**/*.jsp" access="isAuthenticated()"  />
 
         <!-- 程序中的一些通用操作,通常是为其它模块提供服务,例如字典/组织机构树等,只需要登录即可访问,无需进行权限过滤
           使用方式一(推荐): 在类上或方法上标识@CommonRequest

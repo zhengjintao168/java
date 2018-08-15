@@ -1,4 +1,4 @@
-package com.baseframe.modules.api.app.secuirty.util;
+package com.baseframe.modules.api.secuirty.util;
 
 import com.baseframe.common.util.encrypt.AESEncryptUtil;
 import com.baseframe.common.util.StringUtil;

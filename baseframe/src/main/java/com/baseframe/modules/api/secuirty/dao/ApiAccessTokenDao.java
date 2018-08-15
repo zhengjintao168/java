@@ -1,6 +1,5 @@
-package com.baseframe.modules.api.app.secuirty.dao;
+package com.baseframe.modules.api.secuirty.dao;
 
-import com.baseframe.modules.api.app.secuirty.model.ApiAccessTokenModel;
 import org.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -15,7 +14,7 @@ public interface ApiAccessTokenDao {
      * @param accessTokenModel
      * @return
      */
-    Integer addApiAccessToken(ApiAccessTokenModel accessTokenModel);
+    Integer addApiAccessToken(com.baseframe.modules.api.secuirty.model.ApiAccessTokenModel accessTokenModel);
 
     /**
      * 根据用户id删除token
@@ -29,7 +28,7 @@ public interface ApiAccessTokenDao {
      * @param accessToken
      * @return
      */
-    ApiAccessTokenModel queryByAccessToken(String accessToken);
+    com.baseframe.modules.api.secuirty.model.ApiAccessTokenModel queryByAccessToken(String accessToken);
 
     /**
      * 更新token最后访问时间

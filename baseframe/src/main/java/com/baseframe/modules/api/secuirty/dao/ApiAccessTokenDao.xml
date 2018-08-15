@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.baseframe.modules.api.app.secuirty.dao.ApiAccessTokenDao" >
+<mapper namespace="com.baseframe.modules.api.secuirty.dao.ApiAccessTokenDao" >
 
     <insert id="addApiAccessToken"  parameterType="ApiAccessTokenModel"  >
         insert into tb_api_access_token(ID , USER_ID , ACCESS_TOKEN , LAST_ACCESS_TIME , VALIDITY , CREATE_TIME)

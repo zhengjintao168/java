@@ -1,4 +1,4 @@
-package com.baseframe.modules.api.app.secuirty.filter;
+package com.baseframe.modules.api.secuirty.filter;
 
 import org.springframework.util.StreamUtils;
 

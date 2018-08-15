@@ -1,0 +1,428 @@
+/* 
+* @Author: Marte
+* @Date:   2017-10-10 09:20:47
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-10-20 09:58:28
+*/
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    /*max-width: 500px;*/
+
+}
+em{
+    text-decoration: none;
+    font-style: normal;
+}
+li{
+    list-style: none;
+}
+.clearfix:before,
+.clearfix:after {
+    display:table;
+    content:'';
+}
+.clearfix:after{
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;
+}
+
+.fridayActivity{
+    background:#9AD2E9;
+    max-width: 750px;
+    overflow:hidden;
+    margin:0 auto;
+}
+.bannerImg{
+
+}
+.bannerImg img{
+    width: 100%;
+}
+
+.activityConent{
+    margin-top: -30px;
+}
+
+
+/*优惠卷*/
+.getCoupon{
+    margin-top:28px;
+    padding: 5px;
+}
+.getCoupon .discoutCoupon{
+    display: flex;
+    justify-content: space-between;
+}
+.discoutCoupon p{
+    width:32%;
+}
+.discoutCoupon p img{
+    width:100%;
+}
+.takeBtn {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+}
+.takeBtn button {
+    margin: 0 auto;
+    padding: 4px 24px;
+    background: #0e87b9;
+    color: white;
+    border-radius: 50px;
+    font-size: 15px;
+    outline: none;
+    border: none;
+}
+.iconGo {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    background: white;
+    margin: -4px;
+    margin-left: 3px;
+    color: #0e87b9;
+}
+
+/*爆款单品*/
+.hotSale{
+
+    overflow:hidden;
+    padding-bottom: 13px;
+}
+.hotSale>h3{
+    background: url(../img/title1_02.jpg)no-repeat;
+    background-position: bottom;
+    height: 45px;
+    background-size: cover;
+    margin: 5px 0 13px 0px;
+}
+.headText{
+    color: #0151AA;
+    padding: 0 10px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 28px;
+}
+.headText span{
+    color:#FF8F00;
+}
+.hotsaleList{
+    padding:0 7px;
+}
+.hotsaleList li{
+    position:relative;
+}
+.hotsaleList li img{
+    width: 100%;
+}
+.hotsaleList li:nth-of-type(2){
+    margin-top: 8px;
+}
+.hotsaleList li:nth-of-type(3){
+    margin-top: 20px;
+}
+.hotsaleList li:nth-of-type(4){
+    margin-top: 23px;
+}
+.hotsaleList li p button{
+    padding: 3% 18px;
+    background: #0151B0;
+    color: white;
+    border-radius: 50px;
+    font-size: 15px;
+    outline: none;
+    border: none;
+}
+.hotsaleList li p{
+    position:absolute;
+    bottom: 1%;
+}
+
+.hotsaleList li:nth-of-type(1) p{
+    left: 47%;
+}
+.hotsaleList li:nth-of-type(2) p{
+    left: 5%;
+}
+.hotsaleList li:nth-of-type(3) p{
+    left: 47%;
+}
+.hotsaleList li:nth-of-type(4) p{
+    left: 5%;
+}
+
+
+
+
+/*特价商品*/
+.bargain{
+    /*background:#a3bc5a;*/
+    overflow:hidden;
+}
+.bargain>h3{
+    background: url(../img/title2_03.jpg)no-repeat;
+    background-position: bottom;
+    height: 45px;
+    background-size: cover;
+    margin: 18px 0 13px 0px;
+}
+
+
+.moreChoiceness{
+    font-size: 13px;
+    color: #333;
+}
+
+.moreChoiceness li{
+    background: white;
+    margin-left: 1.5%;
+    margin-bottom: 2%;
+    width: 48%;
+    float: left;
+}
+.moreChoiceness .imgBox{
+    height: 160px;
+    border-bottom: 1px solid #F3F3F3;
+    padding: 4px;
+}
+.imgBox>div{
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+.moreChoiceness .imgBox img{
+    width: 100%;
+}
+
+.moreChoiceness .conText {
+    padding: 0 4px;
+    height: 34px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.moreChoiceness .bottomLine {
+    padding: 0 3px;
+    height: 37px;
+    position: relative;
+}
+.moreChoiceness .bottomLine .price{
+    float: left;
+    font-size: 14px;
+    width: 33%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    line-height: 14px;
+}
+
+.price{
+    position:relative;
+    color:#f23030;
+}
+.price span{
+    float:left;
+}
+.now-price{
+    font-weight: 600;
+}
+.price .former-price{
+    text-decoration:line-through;
+    color:#999;
+    font-size: 12px;
+}
+
+
+/*螃蟹菜单*/
+.moreChoiceness .menuBlock{
+    width: 95%;
+    padding:8px 4px;
+    background:#B9E0F1;
+    margin:0 auto;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 21px;
+}
+.menuBlock img{
+    width: 100%;
+}
+.menuBlock .menuText{
+    padding:8px 15px;
+}
+.menuText h4{
+    font-size: 15px;
+    color:#FF8A09;
+}
+.menuBlock .menuText p{
+    color:#1D6FD2;
+}
+.recommend .moreChoiceness .darkColor{
+    background:#7EC8E5;
+    padding: 0 4px;
+}
+
+
+
+/*售馨样式*/
+.stockout{
+    position:relative;
+}
+.stockout  .price{
+    color: #999;
+}
+.stockout .cartIcon{
+    background:url(../img/grayBtn.png)no-repeat;
+    background-size:100%;
+}
+.stockout::before{
+    position: absolute;
+    top: 10px;
+    right:2%;
+    z-index: 10;
+    width: 57px;
+    height: 100%;
+    display: inline-block;
+    content: '';
+    background: url(../img/end.png)no-repeat;
+    background-size: 100%;
+}
+
+
+
+
+/*购物车*/
+.cartIcon{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url(../img/carBtn.png) no-repeat;
+    background-size:100%;
+    float: right;
+    margin-top: 8px;
+    margin-right: 2px;
+}
+
+.comlistBox .bottomLine{
+    padding:0 2px;
+    height: 34px;
+    position:relative;
+}
+/*沙拉必备*/
+.recommend{
+    /*background:#a3bc5a;*/
+    overflow:hidden;
+}
+.recommend>h3{
+    background: url(../img/title3_02.jpg)no-repeat;
+    background-position: bottom;
+    height: 45px;
+    background-size: cover;
+    margin: 18px 0 13px 0px;
+}
+.more{
+    box-sizing: border-box;
+    padding-top: 35px;
+    text-align: center;
+    font-size: 13px;
+    color: #0151B0;
+    height: 110px;
+    background: url(../img/bottomImg_06.jpg)no-repeat;
+    background-size: 100% 100%;
+}
+.more button{
+    padding: 4px 22px;
+    background: #0151B0;
+    color: white;
+    margin-top: 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    outline: none;
+    border: none;
+}
+
+/*营养搭配*/
+.nutritionMatch{
+    /*background:#a3bc5a;*/
+    overflow:hidden;
+    padding-bottom: 30px;
+}
+.nutritionMatch>h3{
+    background: url(../img/title4_02.jpg)no-repeat;
+    background-position: bottom;
+    height: 45px;
+    background-size: cover;
+    margin: 43px 0 13px 0px;
+}
+
+/*弹出层*/
+#box{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#000;
+    background-color: rgba(0,0,0,0.5);
+}
+.layeBox{
+    width: 290px;
+    background:red;
+    margin:150px auto;
+    background:url('../img/hinrImg_03.png')no-repeat;
+    background-size: contain;
+    padding: 120px 15px;
+    box-sizing: border-box;
+    position:relative;
+}
+.layeBox .layeText{
+    padding:20px 10px;
+    background:white;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 15px;
+}
+.btnImg{
+    text-align: center;
+}
+.uptade{
+    margin-top: 52%;
+    background:#ff8822;
+    border:2px solid #ffef03;
+    padding: 7px 30px;
+    border-radius: 37px;
+    color:white;
+    outline: 0;
+}
+
+
+  
+
+
+
+
+
+
+
+
+
+

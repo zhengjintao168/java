@@ -1,6 +1,6 @@
-package com.baseframe.modules.api.app.secuirty.service;
+package com.baseframe.modules.api.secuirty.service;
 
-import com.baseframe.modules.api.app.secuirty.model.ApiAccessTokenModel;
+import com.baseframe.modules.api.secuirty.model.ApiAccessTokenModel;
 
 /**
  * User: zjt

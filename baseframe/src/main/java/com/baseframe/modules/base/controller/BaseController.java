@@ -1,7 +1,7 @@
 package com.baseframe.modules.base.controller;
 
 import com.baseframe.common.util.FieldConvertUtil;
-import com.baseframe.modules.api.app.secuirty.config.ApiConfig;
+import com.baseframe.modules.api.secuirty.config.ApiConfig;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.StringUtil;
 import org.apache.commons.io.IOUtils;

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="style/css/freakyFriday.css"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="fridayActivity">
+    <!-- 广告展示图 -->
+    <div class="bannerImg">
+        <img src="style/img/bannerImg.JPG" alt=""/>
+    </div>
+    <div class="activityConent">
+        <div class='hotSale'>
+            <h3></h3>
+            <p class="headText"><span>预售说明</span>：所有预售阳澄湖大闸蟹，非若比邻配送， 下单后24小时内由产地统一发货，走顺丰物流，预 计48小时送到。</p>
+            <ul class="hotsaleList">
+                <li>
+                    <img src="style/img/title4_02.png" alt=""/>
+                    <p>
+                        <button onclick="selectPayWay(event , 10.8)" class="selectPayWay">立即购买></button>
+                    </p>
+                </li>
+                <li>
+                    <img src="style/img/title1_02.png"/>
+                    <p>
+                        <button onclick="selectPayWay(event , 118)" class="selectPayWay">立即购买></button>
+                    </p>
+                </li>
+                <li>
+                    <img src="style/img/title2_02.png" alt=""/>
+                    <p>
+                        <button onclick="selectPayWay(event , 178)" class="selectPayWay">立即购买></button>
+                    </p>
+                </li>
+                <li>
+                    <img src="style/img/title3_02.png" alt=""/>
+                    <p>
+                        <button onclick="selectPayWay(event , 88)" class="selectPayWay">立即购买></button>
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 沙拉必备 -->
+        <div class="recommend">
+            <div class="moreChoiceness">
+                <!-- 清真大闸蟹 -->
+                <div class="menuBlock">
+                    <img src="style/img/branImg1_03.jpg" alt=""/>
+                    <div class="menuText">
+                        <h4>食材明细：</h4>
+                        <p>大闸蟹8只、香葱适量、姜末适量、</p>
+                        <p>香醋5勺、冰糖1—2粒、生抽半勺</p>
+                    </div>
+                    <div class="menuText">
+                        <h4>做法步骤：</h4>
+                        <p>1.将蟹逐只洗净，放入水中养半天，使他排净腹中污物</p>
+                        <p>2.醋内加入生抽、冰糖、葱末、姜末，做成姜醋汁</p>
+                        <p>3.锅内水烧开，大闸蟹腹部朝上放入锅内蒸约20分钟</p>
+                        <p>4.取出后放入盘内，连同姜醋汁上桌使用</p>
+                    </div>
+                </div>
+                <!-- 香辣炒蟹 -->
+                <div class="menuBlock">
+                    <img src="style/img/branImg_03.jpg" alt=""/>
+                    <div class="menuText">
+                        <h4>食材明细：</h4>
+                        <p>大闸蟹3只、大葱1段、辣椒酱1勺、</p>
+                        <p>姜1片、蒜3瓣、酱油3勺、辣椒5个、香菜少许</p>
+                    </div>
+                    <div class="menuText">
+                        <h4>做法步骤：</h4>
+                        <p>1.大闸蟹刷洗干净，摘掉脐甲，对半切开</p>
+                        <p>2.配料葱姜蒜辣椒等准备好</p>
+                        <p>3.热锅，放油爆香将酸辣椒，再放螃蟹倒进去炒</p>
+                        <p>4.倒入酱油，倒入适量的开水</p>
+                        <p>5.加入一勺辣椒酱，盖盖煮15分钟，煮到收汁</p>
+                        <p>6.最后放入葱翻炒几下即可出锅</p>
+                    </div>
+                </div>
+
+                <!-- 小贴士 -->
+                <div class="menuBlock darkColor">
+                    <div class="menuText">
+                        <h4>小贴士：</h4>
+                        <p>1.蒸蟹时水中放点食用油，蒸出来的蟹颜色会更漂亮</p>
+                        <p>2.蟹一定要活吃，死蟹不能食用，会引起严重的食物中毒</p>
+                        <p>3.不可与红薯、南瓜、蜂蜜、橙子、梨、石榴、香瓜、等同食，可能会导致食物中毒</p>
+                        <p>4.姜末请多准备一些，蟹性寒，姜可适当缓解</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 购物车动画 -->
+    <p id="Go" style="position:fixed;top:0;right:0;visibility:hidden;height:30px;width:30px;"></p>
+    <!-- 返回顶部 -->
+    <p id="goTop" onclick="cscrollTop()" style="position: fixed;bottom: 46px;right: 30px;display:none;"><img src="style/img/goTop.png" height="40" width="40" alt=""/></p>
+
+    <!-- 遮罩层提示层 -->
+    <div id="box" style="display:none">
+        <div class="layeBox">
+            <p class="btnImg">
+                <button class="uptade">立即更新</button>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<!-- 选择支付方式模态框 --- begin  -->
+<div class="modal fade" id="selectPayWayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">选择支付方式</h4>
+            </div>
+            <div class="modal-body">
+
+                <div style="margin-top: 20px;margin-bottom: 20px;height: 50px;">
+                    <label class="col-md-3 col-sm-3 control-label">支付金额：</label>
+                    <div class="col-md-8 col-sm-8">
+                        <input id="payPrice" name="payPrice" type="input" readonly class="form-control"/>
+                    </div>
+                </div>
+
+                <div style="height: 40px;">
+                    <label class="col-md-3 col-sm-3 control-label">支付方式：</label>
+                    <div class="col-md-8 col-sm-8">
+                        <input name="istype" type="radio" value="1" checked="checked"/>&nbsp;&nbsp;支付宝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input name="istype" type="radio" value="2"/>&nbsp;&nbsp;微信
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;margin-bottom: 20px;height: 40px;">
+                    <label class="col-md-3 col-sm-3 control-label">用户昵称：</label>
+                    <div class="col-md-8 col-sm-8">
+                        <input id="orderuid" name="orderuid" type="input" value="匿名用户" class="form-control"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="createOrder();" >提交</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- 选择支付方式模态框 --- end  -->
+
+
+<script type="text/javascript" src="style/jquery.js"></script>
+<script src="../../resources/js/extend/jquery.string.extend.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+    /**
+     * 1. 弹出对话框,选择支付宝或微信支付
+     * @param a
+     */
+    function selectPayWay(a, price) {
+
+        $('#selectPayWayModal').modal('show');
+        $("#payPrice").val(price);
+
+    }
+
+    /**
+     * 2. 提交订单
+     * @param a
+     */
+    function createOrder() {
+
+        //参数获取
+        var baseURL = $.string.getBaseURL();
+
+        var payPrice = $("#payPrice").val();
+        var istype = $("input[name='istype']:checked").val();
+        var orderuid = $("#orderuid").val();
+
+        //参数提交到后台
+
+
+    }
+
+
+    // 遮罩层禁止滚动
+    $("#box").bind("touchmove", function (event) {
+        event.preventDefault;
+    }, false)
+    // 返回顶部
+    $(window).scroll(function () {
+        var sc = $(window).scrollTop();
+        if (sc > 600) {
+            $("#goTop").show()
+        } else {
+            $("#goTop").hide()
+        }
+    });
+    function cscrollTop() {
+        $('body,html').animate({scrollTop: 0}, 600);
+        return false;
+    }
+
+</script>
+</html>
