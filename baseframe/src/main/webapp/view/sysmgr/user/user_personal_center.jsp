@@ -8,55 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script type="text/javascript">
-
-    var pageScope = {};         //页面作用域,每次进入列表页面置为{},避免全局变量都挂载在window下,无法释放或冲突
-
-    /**
-     * 编辑用户
-     */
-    pageScope.toEditUser = function (id) {
-        $.dialog.show({
-            url: "${baseURL}/view/sysmgr/user/user_personal_center_edit.jsp",
-            params: {"_csrf": token}
-        });
-    };
-
-    /**
-     * 刷新当前界面信息
-     */
-    pageScope.refreshCurrentUserInfo = function () {
-
-        //触发菜单按钮事件,重新刷新此页
-        $("#btnPersonalInfo").trigger("click");
-
-    };
-
-    $(function () {
-
-        //刷新左侧菜单,顶部栏的用户信息
-        $("#topNickname").html("${currentUser.nickname}");
-        $("#topSmallAvatar").attr("src", "${baseURL}${currentUser.avatar}");
-
-        $("#topLargeNickname").html("${currentUser.nickname}");
-        $("#topLargeAvatar").attr("src", "${baseURL}${currentUser.avatar}");
-
-        $("#menuNickname").html("${currentUser.nickname}");
-        $("#menuAvatar").attr("src", "${baseURL}${currentUser.avatar}");
-
-        var imgUrl = "${currentUser.avatar}";
-        if ($.validate.isEmpty(imgUrl)) {
-            imgUrl = "/resources/img/default/default_avatar_male.jpg";
-        }
-
-        $("#imgDetailFile").showImage({
-            imgUrl: imgUrl
-        });
-
-    });
-
-</script>
-
 <div class="row">
     <div class="col-md-12">
 
@@ -112,3 +63,51 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+
+    var pageScope = {};         //页面作用域,每次进入列表页面置为{},避免全局变量都挂载在window下,无法释放或冲突
+
+    /**
+     * 编辑用户
+     */
+    pageScope.toEditUser = function (id) {
+        $.dialog.show({
+            url: "${baseURL}/view/sysmgr/user/user_personal_center_edit.jsp?_csrf=" + token,
+        });
+    };
+
+    /**
+     * 刷新当前界面信息
+     */
+    pageScope.refreshCurrentUserInfo = function () {
+
+        //触发菜单按钮事件,重新刷新此页
+        $("#btnPersonalInfo").trigger("click");
+
+    };
+
+    $(function () {
+
+        //刷新左侧菜单,顶部栏的用户信息
+        $("#topNickname").html("${currentUser.nickname}");
+        $("#topSmallAvatar").attr("src", "${baseURL}${currentUser.avatar}");
+
+        $("#topLargeNickname").html("${currentUser.nickname}");
+        $("#topLargeAvatar").attr("src", "${baseURL}${currentUser.avatar}");
+
+        $("#menuNickname").html("${currentUser.nickname}");
+        $("#menuAvatar").attr("src", "${baseURL}${currentUser.avatar}");
+
+        var imgUrl = "${currentUser.avatar}";
+        if ($.validate.isEmpty(imgUrl)) {
+            imgUrl = "/resources/img/default/default_avatar_male.jpg";
+        }
+
+        $("#imgDetailFile").showImage({
+            imgUrl: imgUrl
+        });
+
+    });
+
+</script>

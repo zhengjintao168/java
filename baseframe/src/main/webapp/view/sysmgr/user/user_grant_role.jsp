@@ -8,11 +8,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript">
+<div class="modal-header">
+    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h4 class="modal-title">授予角色</h4>
+</div>
 
-    $(function () {
-        pageScope.initRoleTree();
-    });
+<div class="modal-body">
+    <div class="bootbox-body">
+
+        <div class="left-tree">
+            <ul id="roleTree" class="ztree"></ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer operation-button">
+    <button data-bb-handler="success" type="button" class="btn btn-success" onclick="pageScope.grantRole()">保存</button>
+    <button data-bb-handler="cancel" type="button" class="btn btn-danger">取消</button>
+</div>
+
+<script type="text/javascript">
 
     /**
      * 初始化树
@@ -103,24 +119,8 @@
 
     };
 
+    $(function () {
+        pageScope.initRoleTree();
+    });
+
 </script>
-
-<div class="modal-header">
-    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h4 class="modal-title">授予角色</h4>
-</div>
-
-<div class="modal-body">
-    <div class="bootbox-body">
-
-        <div class="left-tree">
-            <ul id="roleTree" class="ztree"></ul>
-        </div>
-
-    </div>
-</div>
-
-<div class="modal-footer operation-button">
-    <button data-bb-handler="success" type="button" class="btn btn-success" onclick="pageScope.grantRole()">保存</button>
-    <button data-bb-handler="cancel" type="button" class="btn btn-danger">取消</button>
-</div>

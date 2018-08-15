@@ -8,114 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript">
-
-    $(function () {
-
-        $('#editUserForm').validation();
-
-        /**
-         * 上传头像 - 编辑/回显示
-         */
-        $("#file").singleImageUpload({
-            uploadExtraData: {"module": "user"} ,               //上传图片扩展参数,指定所属模块
-            hiddenField:"#avatar" ,                             //返回隐藏域路径
-            defaultPreviewContent: '<img src="'+baseURL+'/resources/img/default/default_avatar_male.jpg" style="width:160px" >' ,        //默认显示图片
-            imgUrl: "${user.avatar}"            //图片路径,编辑时回显(可选)
-        });
-
-    });
-
-
-    /**
-     * 修改用户信息
-     */
-    pageScope.updateUser = function () {
-
-        //表单验证
-        if (!$("#editUserForm").valid()) {
-            return;
-        }
-
-        var password = $("#password").val();
-        var confirmPassword = $("#confirmPassword").val();
-        if ($.validate.isNotEmpty(password)) {
-
-            if ($.validate.isEmpty(confirmPassword)) {
-                $.msg.error("请输入确认密码!");
-                return;
-            }
-
-            if (password != confirmPassword) {
-                $.msg.error("两次输入密码不一致!");
-                return;
-            }
-
-        }
-
-        var btn = $(".modal-footer .btn-success");              //防止重复提交
-        btn.attr("disabled", "disabled");
-
-        $('#editUserForm').ajaxSubmit({
-            dataType: 'json',
-            type: "post",
-            success: function (response) {
-
-                btn.removeAttr("disabled");
-
-                if (response && response.success) {
-                    $.msg.success(response.msg);
-                    pageScope.userTable.bootstrapTable('refresh');
-                    $(".modal-footer .btn-danger").trigger("click");
-                }
-                else {
-                    $.msg.error(response.msg);
-                }
-
-            }, error: function (e) {
-                btn.removeAttr("disabled");
-            }
-
-        });
-
-    }
-
-    /**
-     * 选择组织机构
-     */
-    pageScope.selectOrg = function (){
-
-        var dialog = $.dialog.show({
-            url: "${baseURL}/view/sysmgr/user/user_edit_organization.jsp",
-            params: {"_csrf": token , "userId": "${user.id}"},
-            size: "small",
-            confirmCallback:function(){
-
-                //获取选中节点
-                var selectOrgTree = $.fn.zTree.getZTreeObj("selectOrgTree");
-                var checkedNodes = selectOrgTree.getCheckedNodes(true);
-
-                if (checkedNodes.length > 0) {
-                    var orgId = checkedNodes[0].id;
-                    var orgName = checkedNodes[0].name;
-
-                    $("#editOrgId").val(orgId);
-                    $("#editOrgName").val(orgName);
-
-                    dialog.hide();
-
-                }
-                else {
-                    $.msg.toast("请选中授予机构!");
-                }
-
-            }
-        });
-
-    }
-
-</script>
-
 <div class="modal-header">
     <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">x</button>
     <h4 class="modal-title">编辑用户</h4>
@@ -127,7 +19,7 @@
         <form id="editUserForm" action="${baseURL}/sysmgr/user/updateUser" class="form-horizontal">
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="editUserId" />
+            <input type="hidden" name="id" id="editUserId" />
 
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 control-label">用户昵称：</label>
@@ -203,3 +95,98 @@
     <button data-bb-handler="success" type="button" class="btn btn-success" onclick="pageScope.updateUser()">保存</button>
     <button data-bb-handler="cancel" type="button" class="btn btn-danger">取消</button>
 </div>
+
+<script type="text/javascript">
+
+    /**
+     * 修改用户信息
+     */
+    pageScope.updateUser = function () {
+
+        //表单验证
+        if (!$("#editUserForm").valid()) {
+            return;
+        }
+
+        var password = $("#password").val();
+        var confirmPassword = $("#confirmPassword").val();
+        if ($.validate.isNotEmpty(password)) {
+
+            if ($.validate.isEmpty(confirmPassword)) {
+                $.msg.error("请输入确认密码!");
+                return;
+            }
+
+            if (password != confirmPassword) {
+                $.msg.error("两次输入密码不一致!");
+                return;
+            }
+
+        }
+
+        var btn = $(".modal-footer .btn-success");              //防止重复提交
+        btn.attr("disabled", "disabled");
+
+        $('#editUserForm').ajaxSubmit({
+            dataType: 'json',
+            type: "post",
+            success: function (response) {
+
+                btn.removeAttr("disabled");
+
+                if (response && response.success) {
+                    $.msg.success(response.msg);
+                    pageScope.userTable.bootstrapTable('refresh');
+                    $(".modal-footer .btn-danger").trigger("click");
+                }
+                else {
+                    $.msg.error(response.msg);
+                }
+
+            }, error: function (e) {
+                btn.removeAttr("disabled");
+            }
+
+        });
+
+    }
+
+    /**
+     * 选择组织机构
+     */
+    pageScope.selectOrg = function (){
+
+        var dialog = $.dialog.show({
+            url: "${baseURL}/view/sysmgr/user/user_edit_organization.jsp?_csrf="+token + "&userId=" + $("#editUserId").val(),
+            size: "small",
+            onLoad: function () {
+
+            },
+            buttonEvents: {
+                success: function () {
+
+                    //获取选中节点
+                    var selectOrgTree = $.fn.zTree.getZTreeObj("selectOrgTree");
+                    var checkedNodes = selectOrgTree.getCheckedNodes(true);
+
+                    if (checkedNodes.length > 0) {
+                        var orgId = checkedNodes[0].id;
+                        var orgName = checkedNodes[0].name;
+
+                        $("#editOrgId").val(orgId);
+                        $("#editOrgName").val(orgName);
+
+                        dialog.hide();
+
+                    }
+                    else {
+                        $.msg.toast("请选中授予机构!");
+                    }
+
+                }
+            }
+        });
+
+    }
+
+</script>

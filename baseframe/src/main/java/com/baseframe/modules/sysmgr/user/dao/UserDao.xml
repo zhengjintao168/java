@@ -33,7 +33,8 @@
 
     <select id="queryUserList" parameterType="map" resultType="UserModel">
 
-        select distinct tsu.* from tb_sys_user tsu
+        select distinct tsu.* , (select tor.name from tb_organization tor where tor.id = tsu.org_id ) as orgName
+        from tb_sys_user tsu
 
         <where>
 

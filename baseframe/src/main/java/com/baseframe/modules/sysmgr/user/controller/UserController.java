@@ -146,32 +146,6 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 前往修改用户界面
-     *
-     * @param model
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/toEditUser")
-    public String toEditUser(Model model, String id) {
-        model.addAttribute("user", userService.queryUserById(id));
-        return "sysmgr/user/user_edit";
-    }
-
-    /**
-     * 前往用户详情
-     *
-     * @param model
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/toUserDetail")
-    public String toUserDetail(Model model, String id) {
-        model.addAttribute("user", userService.queryUserById(id));
-        return "sysmgr/user/user_detail";
-    }
-
-    /**
      * 修改用户 (通用模块,因为可修改个人信息)
      *
      * @param request

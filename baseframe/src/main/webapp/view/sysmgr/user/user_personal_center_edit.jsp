@@ -8,6 +8,94 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<div class="modal-header">
+    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h4 class="modal-title">编辑用户</h4>
+</div>
+
+<div class="modal-body">
+    <div class="bootbox-body">
+
+        <form id="editUserForm" action="${baseURL}/sysmgr/user/updateUser" class="form-horizontal">
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="id" value="${currentUser.id}"/>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-3 control-label">用户昵称：</label>
+                <div class="col-md-8 col-sm-8">
+                    <input name="nickname" value="${currentUser.nickname}" type="text" class="form-control" check-type="required" maxlength="20" placeholder="请输入用户昵称"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-3 control-label">登录账号：</label>
+                <div class="col-md-8 col-sm-8">
+                    <input name="account" value="${currentUser.account}" type="text" class="form-control" check-type="required" maxlength="20" placeholder="请输入登录账号"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-3 control-label">密码：</label>
+                <div class="col-md-8 col-sm-8">
+                    <input type="password" name="password" id="password" placeholder="请填写新密码,不填写则默认保持原密码" class="form-control" maxlength="20" autocomplete="new-password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-3 control-label">确认密码：</label>
+                <div class="col-md-8 col-sm-8">
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="请填写确认密码" class="form-control" maxlength="20" autocomplete="new-password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-3 control-label">手机号码：</label>
+                <div class="col-md-8 col-sm-8">
+                    <input name="phone" value="${currentUser.phone}" type="text" class="form-control" check-type="required mobile" placeholder="请输入手机号码"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-3 control-label">组织机构：</label>
+                <div class="col-md-8 col-sm-8">
+                    <div class="input-group">
+                        <input id="editOrgName" name="orgName" type="text" class="form-control" check-type="required" disabled value="${currentUser.orgName}">
+                        <input id="editOrgId" name="orgId" type="hidden" value="${currentUser.orgId}">
+
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" onclick="pageScope.selectOrg();">选择</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-3 control-label">用户头像：</label>
+                <div class="col-md-8 col-sm-8">
+
+                    <%-- 上传文件表单组件 --%>
+                    <div class="kv-avatar">
+                        <input id="editImgFile" name="editImgFile" type="file">
+                    </div>
+
+                </div>
+
+                <%-- 隐藏域,保存上传文件的路径  --%>
+                <input id="avatar" name="avatar" type="hidden" value="${currentUser.avatar}"/>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="modal-footer operation-button">
+    <button data-bb-handler="success" type="button" class="btn btn-success" onclick="pageScope.updateUser()">保存</button>
+    <button data-bb-handler="cancel" type="button" class="btn btn-danger">取消</button>
+</div>
+
 <script type="text/javascript">
 
     $(function () {
@@ -118,91 +206,3 @@
     }
 
 </script>
-
-<div class="modal-header">
-    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h4 class="modal-title">编辑用户</h4>
-</div>
-
-<div class="modal-body">
-    <div class="bootbox-body">
-
-        <form id="editUserForm" action="${baseURL}/sysmgr/user/updateUser" class="form-horizontal">
-
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="id" value="${currentUser.id}"/>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-3 control-label">用户昵称：</label>
-                <div class="col-md-8 col-sm-8">
-                    <input name="nickname" value="${currentUser.nickname}" type="text" class="form-control" check-type="required" maxlength="20" placeholder="请输入用户昵称"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-3 control-label">登录账号：</label>
-                <div class="col-md-8 col-sm-8">
-                    <input name="account" value="${currentUser.account}" type="text" class="form-control" check-type="required" maxlength="20" placeholder="请输入登录账号"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-3 control-label">密码：</label>
-                <div class="col-md-8 col-sm-8">
-                    <input type="password" name="password" id="password" placeholder="请填写新密码,不填写则默认保持原密码" class="form-control" maxlength="20" autocomplete="new-password">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-3 control-label">确认密码：</label>
-                <div class="col-md-8 col-sm-8">
-                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="请填写确认密码" class="form-control" maxlength="20" autocomplete="new-password">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-3 control-label">手机号码：</label>
-                <div class="col-md-8 col-sm-8">
-                    <input name="phone" value="${currentUser.phone}" type="text" class="form-control" check-type="required mobile" placeholder="请输入手机号码"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-3 control-label">组织机构：</label>
-                <div class="col-md-8 col-sm-8">
-                    <div class="input-group">
-                        <input id="editOrgName" name="orgName" type="text" class="form-control" check-type="required" disabled value="${currentUser.orgName}">
-                        <input id="editOrgId" name="orgId" type="hidden" value="${currentUser.orgId}">
-
-                        <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" onclick="pageScope.selectOrg();">选择</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-3 control-label">用户头像：</label>
-                <div class="col-md-8 col-sm-8">
-
-                    <%-- 上传文件表单组件 --%>
-                    <div class="kv-avatar">
-                        <input id="editImgFile" name="editImgFile" type="file">
-                    </div>
-
-                </div>
-
-                <%-- 隐藏域,保存上传文件的路径  --%>
-                <input id="avatar" name="avatar" type="hidden" value="${currentUser.avatar}"/>
-
-            </div>
-
-        </form>
-
-    </div>
-</div>
-
-<div class="modal-footer operation-button">
-    <button data-bb-handler="success" type="button" class="btn btn-success" onclick="pageScope.updateUser()">保存</button>
-    <button data-bb-handler="cancel" type="button" class="btn btn-danger">取消</button>
-</div>

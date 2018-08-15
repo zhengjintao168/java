@@ -30,7 +30,7 @@ $.extend({
                 size: options.size || "",
                 closeButton: true,
                 className: options.className || "default-bootbox-modal",        //自定义宽度
-                buttonEvent: options.buttonEvent || {}                 //自定义底部按钮回调事件
+                buttonEvents: options.buttonEvents || {}                 //自定义底部按钮回调事件
             });
 
             options.onLoad && dialog.on('loaded.bs.modal', options.onLoad);

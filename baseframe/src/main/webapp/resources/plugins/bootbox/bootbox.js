@@ -700,8 +700,8 @@
             } else {
 
                 //其它按钮事件
-                if(options.buttonEvent[callbackKey]){
-                    options.buttonEvent[callbackKey]();
+                if(options.buttonEvents[callbackKey]){
+                    options.buttonEvents[callbackKey]();
                 }
 
             }

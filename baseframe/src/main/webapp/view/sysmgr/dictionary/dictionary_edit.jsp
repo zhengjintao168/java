@@ -71,7 +71,7 @@
 </div>
 
 <div class="modal-footer operation-button" >
-    <button data-bb-handler="success" type="button" class="btn btn-success" onclick="pageScope.updateDictionary()" >保存</button>
+    <button data-bb-handler="success" type="button" class="btn btn-success"  >保存</button>
     <button data-bb-handler="cancel" type="button" class="btn btn-danger" >取消</button>
 </div>
 
@@ -80,41 +80,5 @@
     $(function(){
         $('#editDictionaryForm').validation();
     });
-
-    /**
-     * 修改字典信息
-     */
-    pageScope.updateDictionary = function(){
-
-        if (!$("#editDictionaryForm").valid()) {             //表单验证
-            return;
-        }
-
-        var btn = $(".modal-footer .btn-success");              //防止重复提交
-        btn.attr("disabled", "disabled");
-
-        $('#editDictionaryForm').ajaxSubmit({
-            dataType: 'json',
-            type: "post",
-            success: function (response) {
-
-                btn.removeAttr("disabled");
-
-                if(response && response.success){
-                    $.msg.success(response.msg);
-                    pageScope.initDictionaryTree();
-                    $(".modal-footer .btn-danger").trigger("click");
-                }
-                else{
-                    $.msg.error(response.msg);
-                }
-
-            } , error: function (e) {
-                btn.removeAttr("disabled");
-            }
-
-        });
-
-    }
 
 </script>

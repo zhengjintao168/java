@@ -16,44 +16,44 @@
 <div class="modal-body">
     <div class="bootbox-body">
 
-        <div class="left-tree" >
-            <ul id="permissionTree" class="ztree" ></ul>
+        <div class="left-tree">
+            <ul id="permissionTree" class="ztree"></ul>
         </div>
 
     </div>
 </div>
 
-<div class="modal-footer operation-button" >
-    <button data-bb-handler="success" type="button" class="btn btn-success" onclick="pageScope.grantPermission()" >保存</button>
-    <button data-bb-handler="cancel" type="button" class="btn btn-danger" >取消</button>
+<div class="modal-footer operation-button">
+    <button data-bb-handler="success" type="button" class="btn btn-success">保存</button>
+    <button data-bb-handler="cancel" type="button" class="btn btn-danger">取消</button>
 </div>
 
-<script type="text/javascript" >
+<script type="text/javascript">
 
-    $(function(){
+    $(function () {
 
         var setting = {
-            data : {
-                simpleData : {
-                    enable : true,
-                    idKey : "id",
-                    pIdKey : "parentId"
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "parentId"
                 },
-                key : {
-                    name : "name"
+                key: {
+                    name: "name"
                 }
             },
-            check : {
-                enable : true
+            check: {
+                enable: true
             }
         };
 
         $.ajax({
-            url : "${baseURL}/sysmgr/role/queryPermissionListForGrant",
-            type : "post",
-            dataType : "json",
-            data : {"_csrf" : token,"roleId" : "${param.roleId}"},
-            success : function(response) {
+            url: "${baseURL}/sysmgr/role/queryPermissionListForGrant",
+            type: "post",
+            dataType: "json",
+            data: {"_csrf": token, "roleId": "${param.roleId}"},
+            success: function (response) {
 
                 //初始化树
                 var orgNodes = response;
@@ -67,54 +67,5 @@
         });
 
     });
-
-    /**
-     * 授予权限
-     */
-    pageScope.grantPermission = function(){
-
-        //获取选中节点
-        var permissionTree = $.fn.zTree.getZTreeObj("permissionTree");
-        var checkedNodes = permissionTree.getCheckedNodes(true);
-
-        if(checkedNodes.length > 0){
-
-            //获取按,号分割返回的id
-            var ids = $.string.getIdsFromArray(checkedNodes);
-
-            var btn = $(".modal-footer .btn-success");        //防止重复提交
-            btn.attr("disabled","disabled");
-
-            //授予权限
-            $.ajax({
-                url:"${baseURL}/sysmgr/role/grantPermission",
-                type:"post",
-                dataType: 'json',
-                data : {"_csrf" : token,"permissionIds" : ids,"roleId" : "${param.roleId}"},
-                success:function(response){
-
-                    btn.removeAttr("disabled");
-
-                    if(response && response.success){
-                        $.msg.success(response.msg);
-                        pageScope.roleTable.bootstrapTable('refresh');
-                        $(".modal-footer .btn-danger").trigger("click");
-                    }
-                    else{
-                        $.msg.error(response.msg);
-                    }
-
-                },error:function(e){
-                    btn.removeAttr("disabled");
-                }
-
-            });
-
-        }
-        else{
-            $.msg.toast("请选中授予权限!");
-        }
-
-    }
 
 </script>
