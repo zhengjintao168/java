@@ -4,12 +4,17 @@
 <mapper namespace="com.baseframe.modules.api.order.dao.OrderApiDao">
 
     <insert id="createOrder">
-        insert into tb_order(order_uid , order_no , order_price , pay_price , istype , pay_status , create_time)
-        values( #{orderuid} , #{orderNo} , #{payPrice} , #{payPrice} , #{istype} , 1 , now() );
+        insert into tb_order(order_uid , order_no , order_price , istype , pay_status , create_time)
+        values( #{orderuid} , #{orderNo} , #{orderPrice} ,  #{istype} , 1 , now() );
     </insert>
 
-    <select id="queryOrderInfoByOrderNo" parameterType="java.lang.String" resultType="java.util.Map" >
+    <select id="queryOrderInfoByOrderNo" parameterType="java.lang.String" resultType="java.util.Map">
         select * from tb_order where order_no = #{orderNo}
     </select>
+
+    <update id="updateOrderStatusToPaySuccess" parameterType="java.lang.String">
+        update tb_order set real_price = #{realprice} , pay_no = #{platform_trade_no} , pay_time = now() , pay_status = 2
+        where order_no = #{orderid}
+    </update>
 
 </mapper>

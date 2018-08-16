@@ -126,7 +126,7 @@
                 <div style="margin-top: 20px;margin-bottom: 20px;height: 50px;">
                     <label class="col-md-3 col-sm-3 control-label">支付金额：</label>
                     <div class="col-md-8 col-sm-8">
-                        <input id="payPrice" name="payPrice" type="input" readonly class="form-control"/>
+                        <input id="orderPrice" name="orderPrice" type="input" readonly class="form-control"/>
                     </div>
                 </div>
 
@@ -157,6 +157,19 @@
 </div>
 <!-- 选择支付方式模态框 --- end  -->
 
+<!-- 支付表单 -->
+<form id="payForm" action="https://www.yellwoshop.cn/pay" class="form-horizontal">
+    <input type="hidden" name="uid" id="uid"/>
+    <input type="hidden" name="price" id="price"/>
+    <input type="hidden" name="istype" id="istype"/>
+    <input type="hidden" name="notify_url" id="notify_url"/>
+    <input type="hidden" name="return_url" id="return_url"/>
+    <input type="hidden" name="orderid" id="orderid"/>
+    <input type="hidden" name="orderuid" id="orderuid2"/>
+    <input type="hidden" name="goodsname" id="goodsname"/>
+    <input type="hidden" name="key" id="key"/>
+</form>
+
 
 <script type="text/javascript" src="style/jquery.js"></script>
 <script src="../../resources/js/extend/jquery.string.extend.js"></script>
@@ -165,18 +178,18 @@
 <script type="text/javascript">
 
     /**
-     * 1. 弹出对话框,选择支付宝或微信支付
+     * 弹出对话框,选择支付宝或微信支付
      * @param a
      */
     function selectPayWay(a, price) {
 
         $('#selectPayWayModal').modal('show');
-        $("#payPrice").val(price);
+        $("#orderPrice").val(price);
 
     }
 
     /**
-     * 2. 提交订单
+     * 1. 提交订单
      * @param a
      */
     function createOrder() {
@@ -184,7 +197,7 @@
         //参数获取
         var baseURL = $.string.getBaseURL();
 
-        var payPrice = $("#payPrice").val();
+        var orderPrice = $("#orderPrice").val();
         var istype = $("input[name='istype']:checked").val();
         var orderuid = $("#orderuid").val();
 
@@ -192,12 +205,19 @@
             url: baseURL + "/api/order/createOrder",
             type: "post",
             dataType: "json",
-            data: {"payPrice": payPrice, "istype": istype, "orderuid": orderuid},
+            data: {"orderPrice": orderPrice, "istype": istype, "orderuid": orderuid},
             success: function (response) {
 
                 if (response && response.success == true) {
+
                     var orderNo = response.data.orderNo;
+
+                    //获取支付信息后，跳转到默认的支付页面
                     getPayInfo(orderNo);
+
+                    //获取支付二维码，需自定义支付页面
+//                    getPayQrCode(orderNo);
+
                 } else {
                     alert(response.msg);
                 }
@@ -208,13 +228,12 @@
     }
 
     /**
-     * 3. 获取支付信息（包含密钥，此操作为了安全期间，只能在服务端进行）
+     * 2. 获取支付信息
      */
     function getPayInfo(orderNo) {
 
         var baseURL = $.string.getBaseURL();
 
-        //获取支付信息
         $.ajax({
             url: baseURL + "/api/order/getPayInfo",
             type: "post",
@@ -223,10 +242,52 @@
             success: function (response) {
 
                 if (response && response.success == true) {
+                    toPay(response.data);
+                } else {
+                    alert(response.msg);
+                }
 
-                    //提交表单跳转到支付页面
+            }
+        });
+
+    }
+
+    /**
+     * 3. 调用第三方支付网关，跳转到支付页面
+     */
+    function toPay(payInfo) {
+
+        $("#uid").val(payInfo.uid);
+        $("#price").val(payInfo.price);
+        $("#istype").val(payInfo.istype);
+        $("#notify_url").val(payInfo.notify_url);
+        $("#return_url").val(payInfo.return_url);
+        $("#orderid").val(payInfo.orderid);
+        $("#orderuid2").val(payInfo.orderuid);
+        $("#goodsname").val(payInfo.goodsname);
+        $("#key").val(payInfo.key);
+
+        $("#payForm").submit();
+
+    }
+
+    /**
+     * 2. 调用第三方支付网关，自定义支付页面
+     * @param payInfo
+     */
+    function getPayQrCode(orderNo) {
+
+        var baseURL = $.string.getBaseURL();
+
+        $.ajax({
+            url: baseURL + "/api/order/getPayQrCode",
+            type: "post",
+            dataType: "json",
+            data: {"orderNo": orderNo},
+            success: function (response) {
+
+                if (response && response.code == "1") {
                     console.log(JSON.stringify(response));
-
                 } else {
                     alert(response.msg);
                 }

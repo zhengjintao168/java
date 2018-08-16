@@ -18,13 +18,18 @@ public class OrderApiServiceImpl implements OrderApiService {
     private OrderApiDao orderApiDao;
 
     @Override
-    public int createOrder(String orderNo, String payPrice, String istype, String orderuid) {
-        return orderApiDao.createOrder(orderNo, payPrice, istype, orderuid);
+    public int createOrder(String orderNo, String orderPrice, String istype, String orderuid) {
+        return orderApiDao.createOrder(orderNo, orderPrice, istype, orderuid);
     }
 
     @Override
     public Map<String, Object> queryOrderInfoByOrderNo(String orderNo) {
         return orderApiDao.queryOrderInfoByOrderNo(orderNo);
+    }
+
+    @Override
+    public int updateOrderStatusToPaySuccess(String platform_trade_no, String orderid, String realprice) {
+        return orderApiDao.updateOrderStatusToPaySuccess(platform_trade_no, orderid, realprice);
     }
 
 

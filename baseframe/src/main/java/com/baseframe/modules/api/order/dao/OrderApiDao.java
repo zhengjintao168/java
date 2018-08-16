@@ -12,9 +12,12 @@ import java.util.Map;
 @MapperScan
 public interface OrderApiDao {
 
-    int createOrder(@Param("orderNo") String orderNo, @Param("payPrice") String payPrice,
+    int createOrder(@Param("orderNo") String orderNo, @Param("orderPrice") String orderPrice,
                     @Param("istype") String istype, @Param("orderuid") String orderuid);
 
     Map<String, Object> queryOrderInfoByOrderNo(@Param("orderNo") String orderNo);
+
+    int updateOrderStatusToPaySuccess(@Param("platform_trade_no") String platform_trade_no
+            , @Param("orderid") String orderid, @Param("realprice") String realprice);
 
 }
