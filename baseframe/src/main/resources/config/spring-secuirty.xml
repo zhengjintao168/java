@@ -23,7 +23,7 @@
     <secuirty:http pattern="/api/**" once-per-request="true" create-session="never" auto-config="true">
         <secuirty:csrf disabled="true"/>
         <secuirty:custom-filter ref="springUtf8Encoding" position="FIRST"/>
-        <secuirty:custom-filter ref="apiSecuirtyFilter" after="FIRST"/>
+        <!--<secuirty:custom-filter ref="apiSecuirtyFilter" after="FIRST"/>-->
     </secuirty:http>
 
     <!-- 拦截系统内部的请求,进行权限控制 -->

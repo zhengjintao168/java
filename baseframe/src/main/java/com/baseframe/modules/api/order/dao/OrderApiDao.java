@@ -1,14 +1,20 @@
 package com.baseframe.modules.api.order.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
+
+import java.util.Map;
 
 /**
  * User: zjt
  * DateTime: 2018/8/15 18:20
  */
 @MapperScan
-public class OrderApiDao {
+public interface OrderApiDao {
 
+    int createOrder(@Param("orderNo") String orderNo, @Param("payPrice") String payPrice,
+                    @Param("istype") String istype, @Param("orderuid") String orderuid);
 
+    Map<String, Object> queryOrderInfoByOrderNo(@Param("orderNo") String orderNo);
 
 }

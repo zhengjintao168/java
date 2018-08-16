@@ -148,7 +148,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="createOrder();" >提交</button>
+                <button type="button" class="btn btn-primary" onclick="createOrder();">提交</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
 
@@ -188,8 +188,51 @@
         var istype = $("input[name='istype']:checked").val();
         var orderuid = $("#orderuid").val();
 
-        //参数提交到后台
+        $.ajax({
+            url: baseURL + "/api/order/createOrder",
+            type: "post",
+            dataType: "json",
+            data: {"payPrice": payPrice, "istype": istype, "orderuid": orderuid},
+            success: function (response) {
 
+                if (response && response.success == true) {
+                    var orderNo = response.data.orderNo;
+                    getPayInfo(orderNo);
+                } else {
+                    alert(response.msg);
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * 3. 获取支付信息（包含密钥，此操作为了安全期间，只能在服务端进行）
+     */
+    function getPayInfo(orderNo) {
+
+        var baseURL = $.string.getBaseURL();
+
+        //获取支付信息
+        $.ajax({
+            url: baseURL + "/api/order/getPayInfo",
+            type: "post",
+            dataType: "json",
+            data: {"orderNo": orderNo},
+            success: function (response) {
+
+                if (response && response.success == true) {
+
+                    //提交表单跳转到支付页面
+                    console.log(JSON.stringify(response));
+
+                } else {
+                    alert(response.msg);
+                }
+
+            }
+        });
 
     }
 
