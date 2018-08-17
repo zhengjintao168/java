@@ -32,7 +32,7 @@ public class OrderApiController extends BaseController {
     private OrderApiService orderApiService;
 
     private static final String NOTIFY_URL = "/api/order/paySuccessNotify";
-    private static final String RETURN_URL = "www.qq.com";
+    private static final String RETURN_URL = "/static/result/paySuccess.html";
 
     /**
      * 创建订单
@@ -95,6 +95,7 @@ public class OrderApiController extends BaseController {
         String istype = orderInfo.get("istype").toString();
         String goodsname = "测试商品";
         String notifyUrl = IpUtil.getBaseURL(request) + NOTIFY_URL;
+        String returnUrl = IpUtil.getBaseURL(request) + RETURN_URL;
 
         //生成支付密钥（此操作只能在服务端进行）
         Map<String, String> params = new HashMap<>();
@@ -102,7 +103,7 @@ public class OrderApiController extends BaseController {
         params.put("price", orderPrice);
         params.put("istype", istype);
         params.put("notify_url", notifyUrl);
-        params.put("return_url", RETURN_URL);
+        params.put("return_url", returnUrl);
         params.put("orderid", orderNo);
         params.put("orderuid", orderUid);
         params.put("goodsname", goodsname);
@@ -114,7 +115,7 @@ public class OrderApiController extends BaseController {
         payInfo.put("price", orderPrice);
         payInfo.put("istype", istype);
         payInfo.put("notify_url", notifyUrl);
-        payInfo.put("return_url", RETURN_URL);
+        payInfo.put("return_url", returnUrl);
         payInfo.put("orderid", orderNo);
         payInfo.put("orderuid", orderUid);
         payInfo.put("goodsname", goodsname);
@@ -155,9 +156,10 @@ public class OrderApiController extends BaseController {
         String istype = orderInfo.get("istype").toString();
         String goodsname = "测试商品";
         String notifyUrl = IpUtil.getBaseURL(request) + NOTIFY_URL;
+        String returnUrl = IpUtil.getBaseURL(request) + RETURN_URL;
 
         //获取支付二维码
-        String result = PaiPaiPayUtil.getPayQrCode(orderPrice, istype, notifyUrl, RETURN_URL, orderNo, orderUid, goodsname);
+        String result = PaiPaiPayUtil.getPayQrCode(orderPrice, istype, notifyUrl, returnUrl, orderNo, orderUid, goodsname);
         writeJson(response, result);
 
     }

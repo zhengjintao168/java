@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="style/css/freakyFriday.css"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>阳澄湖大闸蟹</title>
 </head>
 <body>
 <div class="fridayActivity">
@@ -35,13 +36,17 @@
                         <button onclick="selectPayWay(event , 178)" class="selectPayWay">立即购买></button>
                     </p>
                 </li>
-                <li>
-                    <img src="style/img/title3_02.png" alt=""/>
-                    <p>
-                        <button onclick="selectPayWay(event , 88)" class="selectPayWay">立即购买></button>
-                    </p>
-                </li>
             </ul>
+        </div>
+
+        <!-- 自定义金额 -->
+        <div style="margin-bottom:20px;">
+            <p style="margin-left: 14px;font-size: 20px;font-weight: bold;">自定义金额测试</p>
+            <p style="margin-left: 14px;">
+                <input type="number" value="0.01" id="customPrice" style="width:60%;height:34px;font-size:18px;" />
+                <button onclick="customPricePay()" style="margin-left: 14px;padding: 4px 12px; background: #0151B0; color: white;border-radius: 50px;font-size: 15px; outline: none; border: none;">立即购买>
+                </button>
+            </p>
         </div>
 
         <!-- 沙拉必备 -->
@@ -186,6 +191,17 @@
         $('#selectPayWayModal').modal('show');
         $("#orderPrice").val(price);
 
+    }
+
+    /**
+     *  自定义金额支付
+     */
+    function customPricePay(){
+
+        var price = $("#customPrice").val();
+
+        $('#selectPayWayModal').modal('show');
+        $("#orderPrice").val(price);
     }
 
     /**

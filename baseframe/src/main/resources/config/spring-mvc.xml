@@ -38,6 +38,7 @@
 
     <!-- 默认访问登录页-->
     <mvc:view-controller path="/" view-name="redirect:/console/login"/>
+    <mvc:view-controller path="/testPay.html" view-name="redirect:/static/freakyCrab/freakyCrab.html"/>
 
     <!-- 支持jstl、配置前缀、后缀  return hello; 则解析后视图为/view/hello.jsp -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
