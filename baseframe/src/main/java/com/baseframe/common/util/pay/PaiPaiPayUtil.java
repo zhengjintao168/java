@@ -17,8 +17,8 @@ public class PaiPaiPayUtil {
     /**
      * 支付相关配置信息
      */
-    private static final String PAY_URL = "https://www.yellwoshop.cn/pay";                                      //收款接口
-    private static final String GET_ORDER_STATUS_URL = "https://www.yellwoshop.cn/api/getStatusByOrderId";      //查询订单状态地址
+    private static final String PAY_URL = "https://www.n9py.cn/pay";                                      //收款接口
+    private static final String GET_ORDER_STATUS_URL = "https://www.n9py.cn/api/getStatusByOrderId";      //查询订单状态地址
     public static final String UID = "10430";                                                  //必填。您的商户唯一标识，注册后在设置里获得。
     private static final String TOKEN = "1a9b42a6b6bf6af1f2940dd23d95aa06";                    //加密token,不可存储在客户端
 
